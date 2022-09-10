@@ -1,6 +1,8 @@
 package com.dieunn.vietceteraclone.ui.screens
 
+import android.content.ContentValues.TAG
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +32,7 @@ fun AppleNewsTabsScreen(navController: NavController) {
             } catch (e:Exception) {
                 emptyList()
             }
+            Log.d(TAG, "AppleNewsTabsScreen: ${articleList.value}")
         }
     }
     LazyColumn {

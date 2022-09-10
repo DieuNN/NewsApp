@@ -1,5 +1,7 @@
 package com.dieunn.vietceteraclone.ui.components
 
+import android.app.Application
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -11,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -23,12 +26,14 @@ import com.dieunn.vietceteraclone.models.Article
 import com.dieunn.vietceteraclone.models.News
 import com.dieunn.vietceteraclone.models.Source
 import com.dieunn.vietceteraclone.ui.theme.GelionFontFamily
+import com.dieunn.vietceteraclone.viewmodels.AppViewModel
 import kotlinx.coroutines.launch
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
 fun NewsItem(article: Article, navController: NavController) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +45,8 @@ fun NewsItem(article: Article, navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    val linkEncoded = URLEncoder.encode(article.url, StandardCharsets.UTF_8.toString())
+                    val linkEncoded =
+                        URLEncoder.encode(article.url, StandardCharsets.UTF_8.toString())
                     navController.navigate("detail/$linkEncoded")
                 })
         Spacer(modifier = Modifier.height(8.dp))
@@ -88,7 +94,17 @@ fun NewsItem(article: Article, navController: NavController) {
             Row {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_baseline_bookmark_border_24),
-                    contentDescription = null
+                    contentDescription = null,
+                    Modifier.clickable {
+//                        val appViewModel = AppViewModel(application = context.applicationContext as Application)
+//                        val insertResult = appViewModel.addNews(article)
+//
+//                        if (insertResult) {
+//                            Toast.makeText(context, "News added to favorite", Toast.LENGTH_SHORT).show()
+//                        } else {
+//                            Toast.makeText(context, "News already exist!", Toast.LENGTH_SHORT).show()
+//                        }
+                    }
                 )
             }
         }
